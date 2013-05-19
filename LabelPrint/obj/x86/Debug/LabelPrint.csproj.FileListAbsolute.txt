@@ -1,0 +1,14 @@
+D:\100-Study\PersonalProject\LabelPrint\LabelPrint\bin\Debug\LabelPrint.exe.config
+D:\100-Study\PersonalProject\LabelPrint\LabelPrint\bin\Debug\LabelPrint.exe
+D:\100-Study\PersonalProject\LabelPrint\LabelPrint\bin\Debug\LabelPrint.pdb
+D:\100-Study\PersonalProject\LabelPrint\LabelPrint\obj\x86\Debug\ResolveAssemblyReference.cache
+D:\100-Study\PersonalProject\LabelPrint\LabelPrint\obj\x86\Debug\LabelPrint.Properties.Resources.resources
+D:\100-Study\PersonalProject\LabelPrint\LabelPrint\obj\x86\Debug\GenerateResource.read.1.tlog
+D:\100-Study\PersonalProject\LabelPrint\LabelPrint\obj\x86\Debug\GenerateResource.write.1.tlog
+D:\100-Study\PersonalProject\LabelPrint\LabelPrint\obj\x86\Debug\LabelPrint.exe
+D:\100-Study\PersonalProject\LabelPrint\LabelPrint\obj\x86\Debug\LabelPrint.pdb
+D:\100-Study\PersonalProject\LabelPrint\LabelPrint\obj\x86\Debug\LabelPrint.LabelPrint.resources
+D:\100-Study\PersonalProject\LabelPrint\LabelPrint\bin\Debug\LabelPrint.exe.manifest
+D:\100-Study\PersonalProject\LabelPrint\LabelPrint\bin\Debug\LabelPrint.application
+D:\100-Study\PersonalProject\LabelPrint\LabelPrint\obj\x86\Debug\LabelPrint.exe.manifest
+D:\100-Study\PersonalProject\LabelPrint\LabelPrint\obj\x86\Debug\LabelPrint.application
