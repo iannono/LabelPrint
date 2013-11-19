@@ -35,7 +35,16 @@
             this.pd_LabelStyle = new System.Drawing.Printing.PrintDocument();
             this.psd_Label = new System.Windows.Forms.PageSetupDialog();
             this.dgv_Label = new System.Windows.Forms.DataGridView();
-            this.dgv_Label.AutoGenerateColumns = false;
+            this.dgc_CheckNum = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.资产编号 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.资产名称 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.账面原值 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.管理机构 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.责任人 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.会计凭证号 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.品牌 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.规格型号 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.入账日期 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label3 = new System.Windows.Forms.Label();
             this.cb_All = new System.Windows.Forms.CheckBox();
             this.lb_Count = new System.Windows.Forms.Label();
@@ -71,16 +80,6 @@
             this.label14 = new System.Windows.Forms.Label();
             this.tb_PrintNum = new System.Windows.Forms.TextBox();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.dgc_CheckNum = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.资产编号 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.资产名称 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.账面原值 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.管理机构 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.责任人 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.会计凭证号 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.品牌 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.规格型号 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.入账日期 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_Label)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -129,6 +128,68 @@
             this.dgv_Label.RowTemplate.Height = 23;
             this.dgv_Label.Size = new System.Drawing.Size(963, 471);
             this.dgv_Label.TabIndex = 1;
+            // 
+            // dgc_CheckNum
+            // 
+            this.dgc_CheckNum.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.dgc_CheckNum.HeaderText = "选择";
+            this.dgc_CheckNum.Name = "dgc_CheckNum";
+            this.dgc_CheckNum.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgc_CheckNum.Width = 35;
+            // 
+            // 资产编号
+            // 
+            this.资产编号.DataPropertyName = "资产编号";
+            this.资产编号.HeaderText = "资产编号";
+            this.资产编号.Name = "资产编号";
+            // 
+            // 资产名称
+            // 
+            this.资产名称.DataPropertyName = "资产名称";
+            this.资产名称.HeaderText = "资产名称";
+            this.资产名称.Name = "资产名称";
+            // 
+            // 账面原值
+            // 
+            this.账面原值.DataPropertyName = "账面原值";
+            this.账面原值.HeaderText = "账面原值";
+            this.账面原值.Name = "账面原值";
+            // 
+            // 管理机构
+            // 
+            this.管理机构.DataPropertyName = "管理机构";
+            this.管理机构.HeaderText = "管理机构";
+            this.管理机构.Name = "管理机构";
+            // 
+            // 责任人
+            // 
+            this.责任人.DataPropertyName = "责任人";
+            this.责任人.HeaderText = "责任人";
+            this.责任人.Name = "责任人";
+            // 
+            // 会计凭证号
+            // 
+            this.会计凭证号.DataPropertyName = "会计凭证号";
+            this.会计凭证号.HeaderText = "会计凭证号";
+            this.会计凭证号.Name = "会计凭证号";
+            // 
+            // 品牌
+            // 
+            this.品牌.DataPropertyName = "品牌";
+            this.品牌.HeaderText = "品牌";
+            this.品牌.Name = "品牌";
+            // 
+            // 规格型号
+            // 
+            this.规格型号.DataPropertyName = "规格型号";
+            this.规格型号.HeaderText = "规格型号";
+            this.规格型号.Name = "规格型号";
+            // 
+            // 入账日期
+            // 
+            this.入账日期.DataPropertyName = "入账日期";
+            this.入账日期.HeaderText = "入账日期";
+            this.入账日期.Name = "入账日期";
             // 
             // label3
             // 
@@ -240,7 +301,7 @@
             this.btn_Query.Name = "btn_Query";
             this.btn_Query.Size = new System.Drawing.Size(75, 23);
             this.btn_Query.TabIndex = 1;
-            this.btn_Query.Text = "筛选";
+            this.btn_Query.Text = "刷新";
             this.btn_Query.UseVisualStyleBackColor = true;
             this.btn_Query.Click += new System.EventHandler(this.btn_Query_Click);
             // 
@@ -455,68 +516,6 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(963, 27);
             this.panel2.TabIndex = 8;
-            // 
-            // dgc_CheckNum
-            // 
-            this.dgc_CheckNum.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.dgc_CheckNum.HeaderText = "选择";
-            this.dgc_CheckNum.Name = "dgc_CheckNum";
-            this.dgc_CheckNum.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgc_CheckNum.Width = 35;
-            // 
-            // 资产编号
-            // 
-            this.资产编号.DataPropertyName = "资产编号";
-            this.资产编号.HeaderText = "资产编号";
-            this.资产编号.Name = "资产编号";
-            // 
-            // 资产名称
-            // 
-            this.资产名称.DataPropertyName = "资产名称";
-            this.资产名称.HeaderText = "资产名称";
-            this.资产名称.Name = "资产名称";
-            // 
-            // 账面原值
-            // 
-            this.账面原值.DataPropertyName = "账面原值";
-            this.账面原值.HeaderText = "账面原值";
-            this.账面原值.Name = "账面原值";
-            // 
-            // 管理机构
-            // 
-            this.管理机构.DataPropertyName = "管理机构";
-            this.管理机构.HeaderText = "管理机构";
-            this.管理机构.Name = "管理机构";
-            // 
-            // 责任人
-            // 
-            this.责任人.DataPropertyName = "责任人";
-            this.责任人.HeaderText = "责任人";
-            this.责任人.Name = "责任人";
-            // 
-            // 会计凭证号
-            // 
-            this.会计凭证号.DataPropertyName = "会计凭证号";
-            this.会计凭证号.HeaderText = "会计凭证号";
-            this.会计凭证号.Name = "会计凭证号";
-            // 
-            // 品牌
-            // 
-            this.品牌.DataPropertyName = "品牌";
-            this.品牌.HeaderText = "品牌";
-            this.品牌.Name = "品牌";
-            // 
-            // 规格型号
-            // 
-            this.规格型号.DataPropertyName = "规格型号";
-            this.规格型号.HeaderText = "规格型号";
-            this.规格型号.Name = "规格型号";
-            // 
-            // 入账日期
-            // 
-            this.入账日期.DataPropertyName = "入账日期";
-            this.入账日期.HeaderText = "入账日期";
-            this.入账日期.Name = "入账日期";
             // 
             // LabelPrint
             // 

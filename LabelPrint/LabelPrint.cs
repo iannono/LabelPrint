@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
 using System.Drawing.Printing;
-using System.Threading;
-using System.Data.OleDb;
+using System.Linq;
+using System.Windows.Forms;
+using LinqToExcel;
+using System.Configuration;
 
 
 namespace LabelPrint
@@ -23,8 +21,8 @@ namespace LabelPrint
             InitializeComponent();
             
             Link_Access();
-            Data_Init();
-            check_State();
+            //Data_Init();
+            //check_State();
 
         }
 
@@ -37,28 +35,59 @@ namespace LabelPrint
 
         private void Link_Access()
         {
-            string strDSN = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=\"../whtb2008_V7.mdb\"";
-            string strSQL = Generate_Query();
-            OleDbConnection myConn = new OleDbConnection(strDSN);
+            //string strDSN = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=\"../whtb2008_V7.mdb\"";
+            //string strSQL = Generate_Query();
+            //OleDbConnection myConn = new OleDbConnection(strDSN);
             
+            //try
+            //{
+            //    myConn.Open();
+            //    OleDbDataAdapter myAdapter = new OleDbDataAdapter(strSQL,strDSN);
+            //    DataSet ds = new DataSet();
+            //    myAdapter.Fill(ds);
+            //    this.dgv_Label.DataSource = ds.Tables[0];
+            //    init_Item_Count(ds.Tables[0].Rows.Count.ToString());
+            //}
+            //catch (Exception e)
+            //{
+            //    MessageBox.Show("数据读取错误：\n错误信息--:" + e.Message.ToString(), "系统提示！", MessageBoxButtons.OK);
+            //}
+            //finally
+            //{
+            //    myConn.Close();
+            //}
             try
             {
-                myConn.Open();
-                OleDbDataAdapter myAdapter = new OleDbDataAdapter(strSQL,strDSN);
-                DataSet ds = new DataSet();
-                myAdapter.Fill(ds);
-                this.dgv_Label.DataSource = ds.Tables[0];
-                init_Item_Count(ds.Tables[0].Rows.Count.ToString());
+                var excel = new ExcelQueryFactory(GetDirPath());
+
+                var rows = from v in excel.Worksheet("sheet1")
+                           select new
+                           {
+                               资产编号 = v["资产编号"],
+                               资产名称 = v["资产名称"],
+                               账面原值 = v["账面原值"],
+                               管理机构 = v["管理机构"],
+                               责任人 = v["责任人"],
+                               会计凭证号 = v["会计凭证号"],
+                               品牌 = v["品牌"],
+                               规格型号 = v["规格型号"],
+                               入账日期 = v["入账日期"]
+                           };
+                this.dgv_Label.DataSource = rows.ToList();
+                init_Item_Count(rows.Count().ToString());
             }
             catch (Exception e)
             {
                 MessageBox.Show("数据读取错误：\n错误信息--:" + e.Message.ToString(), "系统提示！", MessageBoxButtons.OK);
             }
-            finally
-            {
-                myConn.Close();
-            } 
         }
+
+        private string GetDirPath()
+        {
+            string filePath = @"D:\" + "fzsdata.xls";
+            return filePath;
+        }
+
         /// <summary>
         /// 数据绑定初始化
         /// </summary>
