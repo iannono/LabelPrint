@@ -60,14 +60,14 @@ namespace LabelPrint
             {
                 var excel = new ExcelQueryFactory(GetDirPath());
 
-                var rows = from v in excel.Worksheet("sheet1")
+                var rows = from v in excel.Worksheet("fzs")
                            select new
                            {
-                               资产编号 = v["资产编号"],
+                               资产编号 = v["卡片编号"],
                                资产名称 = v["资产名称"],
-                               账面原值 = v["账面原值"],
-                               管理机构 = v["管理机构"],
-                               责任人 = v["责任人"],
+                               账面原值 = v["价值"],
+                               管理机构 = v["使用/管理部门"],
+                               责任人 = v["使用人"],
                                会计凭证号 = v["会计凭证号"],
                                品牌 = v["品牌"],
                                规格型号 = v["规格型号"],
@@ -87,148 +87,6 @@ namespace LabelPrint
             string filePath = @"D:\" + "fzsdata.xls";
             return filePath;
         }
-
-        /// <summary>
-        /// 数据绑定初始化
-        /// </summary>
-        private void Data_Init()
-        {
-            try
-            {
-                whtb2008_V7DataSetTableAdapters.VBasAssetStockTableAdapter _BasAssetStockTA = new whtb2008_V7DataSetTableAdapters.VBasAssetStockTableAdapter();
-
-                //绑定资产大类
-                whtb2008_V7DataSetTableAdapters.BasClassCodeTableAdapter _BasClassCodeTA = new whtb2008_V7DataSetTableAdapters.BasClassCodeTableAdapter();
-                whtb2008_V7DataSet.BasClassCodeDataTable _BasClassCodeDT = _BasClassCodeTA.GetBigClass();
-                DataRow _row_Class = _BasClassCodeDT.NewRow();
-                _row_Class["vcBigClass"] = "请选择资产大类";
-                _row_Class["vcBigClassCode"] = 0;
-                _BasClassCodeDT.Rows.InsertAt(_row_Class, 0);
-                this.cb_BigClass.DisplayMember = "vcBigClass";
-                this.cb_BigClass.ValueMember = "vcBigClassCode";
-                
-                //绑定管理机构
-                whtb2008_V7DataSet.VBasAssetStockDataTable _BasAssetStockDT_Dept = _BasAssetStockTA.GetManageDept();
-                DataRow _row_Dept = _BasAssetStockDT_Dept.NewRow();
-                _row_Dept["管理机构"] = "请选择管理机构";
-                _row_Dept["管理机构代码"] = 0;
-                _BasAssetStockDT_Dept.Rows.InsertAt(_row_Dept, 0);
-                this.cb_ManageDept.DisplayMember = "管理机构";
-                this.cb_ManageDept.ValueMember = "管理机构代码";
-
-                //下拉菜单绑定
-                this.cb_BigClass.DataSource = _BasClassCodeDT;
-                this.cb_ManageDept.DataSource = _BasAssetStockDT_Dept;
-
-                //绑定数据集              
-                //whtb2008_V7DataSet.VBasAssetStockDataTable _BasAssetStockDT = _BasAssetStockTA.GetData();
-                
-                //this.dgv_Label.DataSource = _BasAssetStockDT;
-                //initPrinter();
-                
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show("请确认设置了正确数据源：\n错误信息--:" + e.Message.ToString(), "系统提示！", MessageBoxButtons.OK);
-            }
-
-        }
-
-        /// <summary>
-        /// 根据查询条件生成查询字符串
-        /// </summary>
-        private string  Generate_Query()
-        {
-            string _query = "SELECT 卡片编号, 资产编号, 资产名称, 分类名称, 计量单位, 财务分类, 资产大类,数量, 账面原值, 使用状况, 管理机构, 会计凭证号, custom06 AS 规格型号, custom01 AS 品牌, 入账日期, 责任人 FROM VBasAssetStock where 1=1";
-            try
-            {
-                string _big_class = this.cb_BigClass.Text.ToString();//资产大类
-                string _manage_dept = this.cb_ManageDept.Text.ToString();//管理机构
-                string _asset_name = this.tb_AssetName.Text.ToString();//资产名称
-                string _asset_price = this.tb_Price.Text.ToString();//账面原值
-                string _asset_code = this.tb_AssetCode.Text.ToString();//资产编号
-                string _asset_user = this.tb_User.Text.ToString();//使用人
-                string _asset_account = this.tb_Account.Text.ToString();//会计凭证号
-                string _asset_judge = this.tb_Judge.Text.ToString();//品牌
-                string _asset_type = this.tb_Type.Text.ToString();//规格型号
-                string _asset_get_date = this.tb_GetDate.Text.ToString();//入账日期
-
-                if (this.cb_BigClass.SelectedValue.ToString() != "0")
-                {
-                    _query += " and 资产大类 like '%" + _big_class + "%'";
-                }
-
-                if (this.cb_ManageDept.SelectedValue.ToString() != "0")
-                {
-                    _query += " and 管理机构 like '%" + _manage_dept + "%'";
-                }
-
-                if (_asset_name != "")
-                {
-                    _query += " and 资产名称 like '%" + _asset_name + "%'";
-                }
-                if (_asset_price != "")
-                {
-                    _query += " and 账面原值 like '%" + _asset_price + "%'";
-                }
-                if (_asset_code != "")
-                {
-                    _query += " and 资产编号 like '%" + _asset_code + "%'";
-                }
-                if (_asset_user != "")
-                {
-                    _query += " and 使用人 like '%" + _asset_user + "%'";
-                }
-                if (_asset_account != "")
-                {
-                    _query += " and 会计凭证号 like '%" + _asset_account + "%'";
-                }
-                if (_asset_judge != "")
-                {
-                    _query += " and custom01 like '%" + _asset_judge + "%'";
-                }
-                if (_asset_type != "")
-                {
-                    _query += " and custom06 like '%" + _asset_type + "%'";
-                }
-                if (_asset_get_date != "")
-                {
-                    _query += " and 入账日期 like '%" + _asset_get_date + "%'";
-                }
-                return _query;
-            }
-            catch
-            {
-                return _query;
-            }
-        }
-        /// <summary>
-        /// 数据绑定
-        /// </summary>
-        private void DataBound()
-        {
-            try
-            {
-                string _big_class = (this.cb_BigClass.SelectedValue.ToString() == "0") ? "%" : this.cb_BigClass.Text;//资产大类
-                string _manage_dept = (this.cb_ManageDept.SelectedValue.ToString() == "0") ? "%" : this.cb_ManageDept.Text;//管理机构
-                string _asset_name = (this.tb_AssetName.Text.ToString() == "") ? "%" : this.tb_AssetName.Text;//资产名称
-                string _asset_price = (this.tb_Price.Text.ToString() == "") ? "#" : this.tb_Price.Text;//账面原值
-                string _asset_code = (this.tb_AssetCode.Text.ToString() == "") ? "%" : this.tb_AssetCode.Text;//资产编号
-                string _asset_user = (this.tb_User.Text.ToString() == "") ? "%" : this.tb_User.Text;//使用人
-                string _asset_account = (this.tb_Account.Text.ToString() == "") ? "%" : this.tb_Account.Text;//会计凭证号
-                string _asset_judge = (this.tb_Judge.Text.ToString() == "") ? "%" : this.tb_Judge.Text;//品牌
-                string _asset_type = (this.tb_Type.Text.ToString() == "") ? "%" : this.tb_Type.Text;//规格型号
-                string _asset_get_date = (this.tb_GetDate.Text.ToString() == "") ? "%" : this.tb_GetDate.Text;//规格型号
-
-                whtb2008_V7DataSetTableAdapters.VBasAssetStockTableAdapter _BasAssetStockTA = new whtb2008_V7DataSetTableAdapters.VBasAssetStockTableAdapter();
-                whtb2008_V7DataSet.VBasAssetStockDataTable _BasAssetStockDT = _BasAssetStockTA.GetDataByQuery(_big_class, _manage_dept,_asset_code,_asset_name,Convert.ToDecimal(_asset_price),_asset_account,_asset_type,_asset_judge,Convert.ToDateTime(_asset_get_date));
-                this.dgv_Label.DataSource = _BasAssetStockDT;
-                init_Item_Count(_BasAssetStockDT.Rows.Count.ToString());
-            }
-            catch
-            { }
-        }
-
 
         private void btn_PrintSetup_Click(object sender, EventArgs e)
         {
@@ -415,12 +273,6 @@ namespace LabelPrint
         {
             this.lb_Count.Text = _num;
             this.cb_All.Checked = false;
-        }
-
-        private void grid_Bound(whtb2008_V7DataSet.VBasAssetStockDataTable _BasAssetStockDT)
-        {
-            this.dgv_Label.AutoGenerateColumns = false;
-            this.dgv_Label.DataSource = _BasAssetStockDT;
         }
 
         /// <summary>
